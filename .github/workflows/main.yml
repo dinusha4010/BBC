@@ -20,10 +20,10 @@ jobs:
 
       - name: Deploy via rsync over SSH
         run: |
-          rsync -avz --delete . ubuntu@13.53.170.111:/www/wwwroot/dinusha.linkpc.net/
+          rsync -avz --delete . root@13.53.170.111:/www/wwwroot/dinusha.linkpc.net
 
       - name: Restart Web Server (Optional)
         run: |
-          ssh ubuntu@13.53.170.111 << 'EOF'
+          ssh root@13.53.170.111 << 'EOF'
             sudo systemctl restart nginx || sudo systemctl restart apache2
           EOF
