@@ -1,0 +1,29 @@
+name: Deploy Website via SSH
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup SSH Agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SEC }}
+
+      - name: Deploy via rsync over SSH
+        run: |
+          rsync -avz --delete . ubuntu@13.53.170.111:/www/wwwroot/dinusha.linkpc.net/
+
+      - name: Restart Web Server (Optional)
+        run: |
+          ssh ubuntu@13.53.170.111 << 'EOF'
+            sudo systemctl restart nginx || sudo systemctl restart apache2
+          EOF
