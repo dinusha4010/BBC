@@ -18,12 +18,18 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SEC }}
 
+      - name: Add Server to Known Hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H 13.53.170.111 >> ~/.ssh/known_hosts
+
       - name: Deploy via rsync over SSH
         run: |
-          rsync -avz --delete . root@13.53.170.111:/www/wwwroot/dinusha.linkpc.net
+          rsync -avz --delete . root@13.53.170.111:/www/wwwroot/dinusha.linkpc.net/
 
       - name: Restart Web Server (Optional)
         run: |
           ssh root@13.53.170.111 << 'EOF'
             sudo systemctl restart nginx || sudo systemctl restart apache2
           EOF
+
