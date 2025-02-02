@@ -23,13 +23,12 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -H 13.53.170.111 >> ~/.ssh/known_hosts
 
-      - name: Deploy via rsync over SSH
+      - name: Deploy via rsync over SSH (Ignoring .user.ini)
         run: |
-          rsync -avz --delete . root@13.53.170.111:/www/wwwroot/dinusha.linkpc.net/
+          rsync -avz --delete --ignore-errors --exclude=".user.ini" . root@13.53.170.111:/www/wwwroot/dinusha.linkpc.net/
 
       - name: Restart Web Server (Optional)
         run: |
           ssh root@13.53.170.111 << 'EOF'
             sudo systemctl restart nginx || sudo systemctl restart apache2
           EOF
-
