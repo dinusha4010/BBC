@@ -42,12 +42,15 @@ document.addEventListener("DOMContentLoaded", function () {
             let tips = parseFloat(document.getElementById(`tips${i}`).value) || 0;
             let deduction = parseFloat(document.getElementById(`deduction${i}`).value) || 0;
 
+            let netTips = tips - deduction; // Deduct deductions from tips
+            if (netTips < 0) netTips = 0; // Ensure net tips don't go negative
+
             let vatAmount = amountWithoutVAT * VAT_RATE;
 
             totalWithoutVAT += amountWithoutVAT;
             totalVAT += vatAmount;
-            totalTips += tips;
-            finalTotalAmount += amountWithoutVAT + vatAmount + tips - deduction;
+            totalTips += netTips; // Use adjusted tips
+            finalTotalAmount += amountWithoutVAT + vatAmount + netTips;
         }
 
         // Display results with breakdown
@@ -55,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <h3>Total Breakdown</h3>
             <p><strong>Total Amount Without VAT:</strong> ${totalWithoutVAT.toFixed(2)} €</p>
             <p><strong>Total VAT (25.5%):</strong> ${totalVAT.toFixed(2)} €</p>
-            <p><strong>Total Tips:</strong> ${totalTips.toFixed(2)} €</p>
+            <p><strong>Total Tips (After Deductions):</strong> ${totalTips.toFixed(2)} €</p>
             <h3><strong>Final Total Amount:</strong> ${finalTotalAmount.toFixed(2)} €</h3>
         `;
     });
