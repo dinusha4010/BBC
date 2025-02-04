@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const VAT_RATE = 0.24; // Example VAT rate (24%)
+    const VAT_RATE = 0.255; // Updated VAT rate (25.5%)
 
     const invoiceForm = document.getElementById("invoice-form");
     const resultDiv = document.getElementById("result");
@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
             let tips = parseFloat(document.getElementById(`tips${i}`).value) || 0;
             let deduction = parseFloat(document.getElementById(`deduction${i}`).value) || 0;
             
-            let vatAmount = amountWithoutVAT * VAT_RATE;
-            totalAmount += amountWithoutVAT + vatAmount + tips - deduction;
+            let vatAmount = (amountWithoutVAT * VAT_RATE).toFixed(2);
+            totalAmount += parseFloat(amountWithoutVAT) + parseFloat(vatAmount) + parseFloat(tips) - parseFloat(deduction);
         }
 
         resultDiv.innerHTML = `<h3>Total Amount: ${totalAmount.toFixed(2)} €</h3>`;
