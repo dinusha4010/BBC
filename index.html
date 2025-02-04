@@ -3,96 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Save the Bees</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #fffbe0;
-            color: #333;
-            text-align: center;
-        }
-        header {
-            background-color: #f7b733;
-            padding: 20px;
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-        }
-        nav {
-            background-color: #ffcc00;
-            padding: 10px;
-        }
-        nav a {
-            text-decoration: none;
-            color: #333;
-            margin: 0 15px;
-            font-weight: bold;
-        }
-        .container {
-            padding: 20px;
-            max-width: 800px;
-            margin: auto;
-        }
-        .bee-image {
-            width: 100%;
-            max-width: 500px;
-            margin-top: 20px;
-            border-radius: 10px;
-        }
-        .button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #ff9800;
-            color: white;
-            font-size: 18px;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .button:hover {
-            background-color: #e68900;
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            margin-top: 20px;
-        }
-    </style>
+    <title>Invoice Calculator</title>
+    <script src="invoice-calculator.js" defer></script>
 </head>
 <body>
 
-<header>🐝 Save the Bees 🐝</header>
-
-<nav>
-    <a href="#">Home</a>
-    <a href="#">Why Bees Matter</a>
-    <a href="#">Types of Bees</a>
-    <a href="#">How to Help</a>
-</nav>
-
-<div class="container">
-    <h1>Bees are Essential for Our Planet</h1>
-    <p>Bees play a crucial role in pollination, supporting biodiversity and food production. Without bees, our ecosystem would collapse!</p>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Honeybee_landing_on_yellow_chrysanthemum_flower%2C_January_2013.jpg/800px-Honeybee_landing_on_yellow_chrysanthemum_flower%2C_January_2013.jpg" class="bee-image" alt="Bee on a Flower">
+    <h2>Invoice Calculator</h2>
     
-    <h2>Types of Bees</h2>
-    <p>There are over **20,000 species** of bees worldwide. Some common types include:</p>
-    <ul>
-        <li>🐝 Honey Bees</li>
-        <li>🐝 Bumble Bees</li>
-        <li>🐝 Carpenter Bees</li>
-        <li>🐝 Mason Bees</li>
-    </ul>
+    <form id="invoice-form">
+        <label for="numInvoices">Number of Invoices:</label>
+        <input type="number" id="numInvoices" min="1" value="1" required>
+        
+        <div id="invoice-fields">
+            <div class="invoice-item">
+                <h4>Invoice 1</h4>
+                <label>Amount without VAT: <input type="number" id="amountWithoutVAT1" required></label><br>
+                <label>Tips: <input type="number" id="tips1"></label><br>
+                <label>Deductions: <input type="number" id="deduction1"></label><br>
+            </div>
+        </div>
 
-    <a href="#" class="button">Join the Movement</a>
-</div>
+        <button type="submit">Calculate Total</button>
+    </form>
 
-<footer>
-    <p>&copy; 2025 SaveTheBees.org | All rights reserved.</p>
-</footer>
+    <div id="result"></div>
 
 </body>
 </html>
